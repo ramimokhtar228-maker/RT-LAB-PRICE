@@ -1,0 +1,6 @@
+{
+  "name": "معامل RT للتحاليل التشخيصية | د. رامي مختار",
+  "description": "نظام التسعير الذكي وحساب العروض والخصومات وإرسال تقارير الفحوصات عبر واتساب لمعامل RT للتحاليل التشخيصية",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
