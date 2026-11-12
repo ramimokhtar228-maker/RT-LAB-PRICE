@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { LabSettings } from '../types/lab';
-import { Settings, Save, X, Plus, Trash2, Building, Phone, MapPin } from 'lucide-react';
+import { Settings, Save, X, Plus, Trash2, Building, Phone, MapPin, Database, ArrowDownToLine } from 'lucide-react';
 
 interface LabSettingsModalProps {
   isOpen: boolean;
   onClose: () => void;
   settings: LabSettings;
   onSave: (settings: LabSettings) => void;
+  onOpenBackupManager?: () => void;
 }
 
 export const LabSettingsModal: React.FC<LabSettingsModalProps> = ({
@@ -14,6 +15,7 @@ export const LabSettingsModal: React.FC<LabSettingsModalProps> = ({
   onClose,
   settings,
   onSave,
+  onOpenBackupManager,
 }) => {
   const [formData, setFormData] = useState<LabSettings>(settings);
   const [newBranch, setNewBranch] = useState('');
@@ -206,21 +208,37 @@ export const LabSettingsModal: React.FC<LabSettingsModalProps> = ({
             </label>
           </div>
 
-          <div className="flex justify-end gap-2 pt-4 border-t border-slate-800">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold cursor-pointer"
-            >
-              إلغاء
-            </button>
-            <button
-              type="submit"
-              className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold flex items-center gap-1.5 cursor-pointer"
-            >
-              <Save className="w-4 h-4" />
-              <span>حفظ الإعدادات</span>
-            </button>
+          <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+            {onOpenBackupManager ? (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  onOpenBackupManager();
+                }}
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-blue-300 font-bold transition cursor-pointer border border-slate-700"
+              >
+                <ArrowDownToLine className="w-4 h-4 text-cyan-400" />
+                <span>النسخ الاحتياطي واستيراد/تصدير البيانات</span>
+              </button>
+            ) : <div />}
+
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 font-bold cursor-pointer hover:bg-slate-700"
+              >
+                إلغاء
+              </button>
+              <button
+                type="submit"
+                className="px-5 py-2 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold flex items-center gap-1.5 cursor-pointer shadow-md shadow-red-950"
+              >
+                <Save className="w-4 h-4" />
+                <span>حفظ الإعدادات</span>
+              </button>
+            </div>
           </div>
         </form>
       </div>

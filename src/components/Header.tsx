@@ -1,7 +1,7 @@
 import React from 'react';
 import { PWAInstallButton } from './PWAInstallButton';
 import { OfflineIndicator } from './OfflineIndicator';
-import { Gift, FileText, Database, Settings as SettingsIcon, PlusCircle, Flame, Minimize2, Maximize2, Tag } from 'lucide-react';
+import { Gift, FileText, Database, Settings as SettingsIcon, PlusCircle, Flame, Minimize2, Maximize2, Tag, ArrowDownToLine } from 'lucide-react';
 import { LabSettings } from '../types/lab';
 import rtLogo from '../assets/logo.png';
 
@@ -17,6 +17,7 @@ interface HeaderProps {
   onOpenCatalog: () => void;
   onOpenInvoices: () => void;
   onOpenSettings: () => void;
+  onOpenBackupManager: () => void;
   onNewInvoice: () => void;
 }
 
@@ -32,6 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenCatalog,
   onOpenInvoices,
   onOpenSettings,
+  onOpenBackupManager,
   onNewInvoice,
 }) => {
   return (
@@ -164,6 +166,16 @@ export const Header: React.FC<HeaderProps> = ({
                 {invoicesCount}
               </span>
             )}
+          </button>
+
+          {/* Backup, Import & Export Button */}
+          <button
+            onClick={onOpenBackupManager}
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-blue-950 to-indigo-950 border border-blue-500/50 text-blue-200 text-xs sm:text-sm font-bold hover:brightness-110 transition active:scale-95 cursor-pointer shadow-sm shadow-blue-950"
+            title="تثبيت واستيراد وتصدير بيانات النسخة للحفظ (النسخ الاحتياطي)"
+          >
+            <ArrowDownToLine className="w-4 h-4 text-cyan-400" />
+            <span className="whitespace-nowrap">استيراد وتصدير</span>
           </button>
 
           {/* Settings Button */}

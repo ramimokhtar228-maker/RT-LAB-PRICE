@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { LabTest, TestCategory } from '../types/lab';
-import { Database, Plus, Search, Edit3, Check, X, RotateCcw, Save, Trash2, Tag, SlidersHorizontal } from 'lucide-react';
+import { Database, Plus, Search, Edit3, Check, X, RotateCcw, Save, Trash2, Tag, SlidersHorizontal, Download, ArrowDownToLine } from 'lucide-react';
 import { EditTestModal } from './EditTestModal';
+import { storageService } from '../services/storageService';
 
 interface CatalogManagerModalProps {
   isOpen: boolean;
@@ -11,6 +12,7 @@ interface CatalogManagerModalProps {
   onUpdateTest: (test: LabTest) => void;
   onDeleteTest?: (id: string) => void;
   onResetDefaults: () => void;
+  onOpenBackupManager?: () => void;
 }
 
 export const CatalogManagerModal: React.FC<CatalogManagerModalProps> = ({
@@ -21,6 +23,7 @@ export const CatalogManagerModal: React.FC<CatalogManagerModalProps> = ({
   onUpdateTest,
   onDeleteTest,
   onResetDefaults,
+  onOpenBackupManager,
 }) => {
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -149,6 +152,28 @@ export const CatalogManagerModal: React.FC<CatalogManagerModalProps> = ({
               <Plus className="w-4 h-4" />
               <span>إضافة فحص جديد</span>
             </button>
+
+            <button
+              type="button"
+              onClick={() => storageService.exportTestsCSV(tests)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-bold transition cursor-pointer shadow-sm"
+              title="تصدير كشف الأسعار بالكامل كملف Excel CSV"
+            >
+              <Download className="w-3.5 h-3.5" />
+              <span>تصدير CSV</span>
+            </button>
+
+            {onOpenBackupManager && (
+              <button
+                type="button"
+                onClick={onOpenBackupManager}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-blue-900 hover:bg-blue-800 text-white text-xs font-bold transition cursor-pointer shadow-sm"
+                title="فتح نافذة النسخ الاحتياطي الشاملة واستيراد وتصدير النسخة"
+              >
+                <ArrowDownToLine className="w-3.5 h-3.5 text-cyan-300" />
+                <span>استيراد وتصدير</span>
+              </button>
+            )}
 
             <button
               onClick={() => {

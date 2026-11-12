@@ -26,6 +26,7 @@ import { PrintQuotation } from './components/PrintQuotation';
 import { CatalogManagerModal } from './components/CatalogManagerModal';
 import { InvoiceHistoryModal } from './components/InvoiceHistoryModal';
 import { LabSettingsModal } from './components/LabSettingsModal';
+import { BackupManagerModal } from './components/BackupManagerModal';
 import { Check, Sparkles, Activity, FileCheck, Layers, AlertCircle, Flame, Plus } from 'lucide-react';
 
 export default function App() {
@@ -67,6 +68,7 @@ export default function App() {
   const [isCatalogOpen, setIsCatalogOpen] = useState(false);
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isBackupOpen, setIsBackupOpen] = useState(false);
   const [isWhatsAppOpen, setIsWhatsAppOpen] = useState(false);
   const [isPrintOpen, setIsPrintOpen] = useState(false);
 
@@ -96,6 +98,20 @@ export default function App() {
       showToast(next ? 'تم تفعيل النمط المصغر السريع' : 'تم تفعيل النمط العادي');
       return next;
     });
+  };
+
+  // Restore & Persist Backup Data Handler
+  const handleDataRestored = (
+    newTests: LabTest[],
+    newPackages: OfferPackage[],
+    newDailyOffers: DailyOffer[],
+    newSettings: LabSettings
+  ) => {
+    setTests(newTests);
+    setPackages(newPackages);
+    setDailyOffers(newDailyOffers);
+    setSettings(newSettings);
+    showToast('تم استعادة وتثبيت بيانات النسخة الاحتياطية بنجاح!');
   };
 
   // Toggle Test selection
@@ -414,6 +430,7 @@ export default function App() {
         onOpenCatalog={() => setIsCatalogOpen(true)}
         onOpenInvoices={() => setIsHistoryOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}
+        onOpenBackupManager={() => setIsBackupOpen(true)}
         onNewInvoice={handleNewInvoice}
       />
 
@@ -592,6 +609,7 @@ export default function App() {
         onUpdateTest={handleSaveTest}
         onDeleteTest={handleDeleteTest}
         onResetDefaults={handleResetTests}
+        onOpenBackupManager={() => setIsBackupOpen(true)}
       />
 
       {/* Invoices Archive History Modal */}
@@ -618,6 +636,19 @@ export default function App() {
           setSettings(newSettings);
           showToast('تم حفظ إعدادات المعمل بنجاح');
         }}
+        onOpenBackupManager={() => setIsBackupOpen(true)}
+      />
+
+      {/* Backup, Import & Export Manager Modal */}
+      <BackupManagerModal
+        isOpen={isBackupOpen}
+        onClose={() => setIsBackupOpen(false)}
+        tests={tests}
+        packages={packages}
+        dailyOffers={dailyOffers}
+        settings={settings}
+        invoices={invoices}
+        onDataRestored={handleDataRestored}
       />
 
       {/* WhatsApp Preview & Send Modal */}

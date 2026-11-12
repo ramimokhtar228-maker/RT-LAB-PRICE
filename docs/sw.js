@@ -96,7 +96,10 @@ define(['./workbox-afac4cd2'], (function (workbox) { 'use strict';
     "revision": "ac9645ae4ab8acb6aca7996f4a699cf6"
   }, {
     "url": "index.html",
-    "revision": "a24ce1edb851f7de1501698ce0c17084"
+    "revision": "7945b572b3acf3aaef624a8b8037fd89"
+  }, {
+    "url": "icon.svg",
+    "revision": "41de24e17f040bd9c96acfc46e50e2d6"
   }, {
     "url": "favicon.png",
     "revision": "7ff7a968a35b49989c719c2fa81fbaaa"
@@ -107,10 +110,10 @@ define(['./workbox-afac4cd2'], (function (workbox) { 'use strict';
     "url": "assets/logo-BKWIMXhz.png",
     "revision": null
   }, {
-    "url": "assets/index-DUw3DU4m.css",
+    "url": "assets/index-Cs7e0HtU.css",
     "revision": null
   }, {
-    "url": "assets/index-CNxQwoNU.js",
+    "url": "assets/index-ByAjFocI.js",
     "revision": null
   }, {
     "url": "assets/aistudio/IMG_20261024_095049_855_cecabf0b.jpg",

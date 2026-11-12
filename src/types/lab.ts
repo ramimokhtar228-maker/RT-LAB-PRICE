@@ -130,3 +130,20 @@ export interface LabSettings {
   homeVisitAvailable: boolean;
   currency: string;
 }
+
+export interface FullBackupPayload {
+  version: string;
+  exportDate: string;
+  labName: string;
+  settings: LabSettings;
+  tests: LabTest[];
+  packages: OfferPackage[];
+  dailyOffers: DailyOffer[];
+  invoices?: InvoiceRecord[];
+  stats?: {
+    totalTests: number;
+    totalPackages: number;
+    totalDailyOffers: number;
+    totalInvoices: number;
+  };
+}
