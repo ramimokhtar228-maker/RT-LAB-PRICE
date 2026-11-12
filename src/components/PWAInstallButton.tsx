@@ -1,109 +1,123 @@
 import React, { useState } from 'react';
 import { usePWAInstall } from '../hooks/usePWAInstall';
-import { Download, Smartphone, CheckCircle, X } from 'lucide-react';
+import { Download, Smartphone, Laptop, CheckCircle, X, Info, MonitorCheck } from 'lucide-react';
 
 export const PWAInstallButton: React.FC = () => {
   const { isInstallable, isInstalled, isIOS, install } = usePWAInstall();
-  const [showIOSGuide, setShowIOSGuide] = useState(false);
+  const [showGuide, setShowGuide] = useState(false);
 
   if (isInstalled) {
     return (
-      <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs font-medium">
+      <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-950/70 border border-emerald-500/40 text-emerald-300 text-xs font-medium shadow-sm">
         <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-        <span>تطبيق مثبت</span>
+        <span className="hidden sm:inline">التطبيق مثبت وجاهز</span>
+        <span className="sm:hidden">مثبت</span>
       </div>
     );
   }
 
-  if (isInstallable) {
-    return (
+  const handleInstallClick = async () => {
+    if (isInstallable) {
+      const installed = await install();
+      if (!installed) {
+        setShowGuide(true);
+      }
+    } else {
+      setShowGuide(true);
+    }
+  };
+
+  return (
+    <>
       <button
-        onClick={install}
-        className="flex items-center gap-2 rounded-xl bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-rose-600 px-3.5 py-1.5 text-xs sm:text-sm font-semibold text-white shadow-lg shadow-red-950/50 transition-all active:scale-95 border border-red-500/40 cursor-pointer"
-        title="تثبيت التطبيق على الموبايل أو اللابتوب للعمل أوفلاين"
+        onClick={handleInstallClick}
+        className="flex items-center gap-1.5 sm:gap-2 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-red-700 hover:from-red-500 hover:to-rose-500 px-3 sm:px-3.5 py-1 sm:py-1.5 text-xs sm:text-sm font-bold text-white shadow-lg shadow-red-950/60 transition-all active:scale-95 border border-red-400/30 cursor-pointer animate-pulse hover:animate-none"
+        title="تثبيت برنامج معامل RT كتطبيق على الموبايل واللابتوب للعمل أوفلاين وسريعاً"
       >
-        <Download className="w-4 h-4 animate-bounce" />
-        <span>تثبيت البرنامج</span>
+        <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+        <span className="whitespace-nowrap">تثبيت التطبيق</span>
       </button>
-    );
-  }
 
-  if (isIOS) {
-    return (
-      <>
-        <button
-          onClick={() => setShowIOSGuide(true)}
-          className="flex items-center gap-1.5 rounded-xl bg-slate-800/90 border border-slate-700/80 px-3 py-1.5 text-xs font-semibold text-slate-200 hover:bg-slate-800 transition active:scale-95 cursor-pointer"
-        >
-          <Smartphone className="w-3.5 h-3.5 text-red-400" />
-          <span>تثبيت على آيفون</span>
-        </button>
-
-        {showIOSGuide && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-            <div className="w-full max-w-sm rounded-2xl bg-slate-900 border border-slate-700 p-6 shadow-2xl text-right">
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-                <button
-                  onClick={() => setShowIOSGuide(false)}
-                  className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <span>تثبيت على iPhone / iPad</span>
-                  <Smartphone className="w-4 h-4 text-red-400" />
-                </h3>
-              </div>
-              <div className="mt-4 space-y-3 text-sm text-slate-300">
-                <div className="flex items-start gap-3 bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/50">
-                  <span className="w-6 h-6 rounded-full bg-red-600/30 text-red-400 flex items-center justify-center text-xs font-bold shrink-0">
-                    1
-                  </span>
-                  <p>
-                    اضغط على زر <strong>المشاركة (Share)</strong> في شريط متصفح Safari السفلي.
-                  </p>
-                </div>
-                <div className="flex items-start gap-3 bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/50">
-                  <span className="w-6 h-6 rounded-full bg-red-600/30 text-red-400 flex items-center justify-center text-xs font-bold shrink-0">
-                    2
-                  </span>
-                  <p>
-                    انزل للأسفل واضغط على <strong>إضافة إلى الشاشة الرئيسية (Add to Home Screen)</strong>.
-                  </p>
-                </div>
-                <div className="flex items-start gap-3 bg-slate-800/50 p-2.5 rounded-xl border border-slate-700/50">
-                  <span className="w-6 h-6 rounded-full bg-red-600/30 text-red-400 flex items-center justify-center text-xs font-bold shrink-0">
-                    3
-                  </span>
-                  <p>
-                    اضغط على <strong>إضافة (Add)</strong>، وسيصبح البرنامج كتطبيق مستقل يعمل بدون إنترنت!
-                  </p>
-                </div>
-              </div>
+      {showGuide && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="w-full max-w-md rounded-2xl bg-slate-900 border border-slate-700 p-5 sm:p-6 shadow-2xl text-right">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
               <button
-                onClick={() => setShowIOSGuide(false)}
-                className="mt-5 w-full rounded-xl bg-red-600 hover:bg-red-700 py-2.5 text-sm font-bold text-white transition active:scale-95"
+                onClick={() => setShowGuide(false)}
+                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
               >
-                فهمت ذلك
+                <X className="w-5 h-5" />
+              </button>
+              <h3 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                <span>تثبيت برنامج معامل RT</span>
+                <MonitorCheck className="w-5 h-5 text-red-500" />
+              </h3>
+            </div>
+
+            <p className="mt-3 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              يمكنك تشغيل البرنامج كتطبيق مستقل على سطح المكتب في اللابتوب أو كأيقونة تطبيق على هاتفك المحمول للعمل بدون إنترنت وسرعة فائقة:
+            </p>
+
+            <div className="mt-4 space-y-3">
+              {/* Laptop / PC Instruction */}
+              <div className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3">
+                <div className="flex items-center gap-2 text-white font-bold text-xs sm:text-sm mb-1.5 text-red-400">
+                  <Laptop className="w-4 h-4" />
+                  <span>للكمبيوتر واللابتوب (Chrome / Edge):</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-normal">
+                  اضغط على أيقونة التثبيت <span className="inline-block px-1.5 py-0.5 bg-slate-700 rounded text-slate-100 font-mono text-[11px]">⊕</span> في شريط عنوان المتصفح بالأعلى، أو افتح قائمة المتصفح <strong className="text-white">(⋮)</strong> واضغط على <strong className="text-white">&quot;تثبيت معامل RT&quot; (Install App)</strong>.
+                </p>
+              </div>
+
+              {/* Mobile Phone Instruction */}
+              <div className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3">
+                <div className="flex items-center gap-2 text-white font-bold text-xs sm:text-sm mb-1.5 text-blue-400">
+                  <Smartphone className="w-4 h-4" />
+                  <span>لهواتف الأندرويد (Android):</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-normal">
+                  افتح قائمة خيارات متصفح كروم <strong className="text-white">(⋮)</strong> واضغط على <strong className="text-white">&quot;إضافة إلى الشاشة الرئيسية&quot; (Add to Home screen)</strong> أو &quot;تثبيت التطبيق&quot;.
+                </p>
+              </div>
+
+              {/* iPhone / iPad Instruction */}
+              <div className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3">
+                <div className="flex items-center gap-2 text-white font-bold text-xs sm:text-sm mb-1.5 text-amber-400">
+                  <Smartphone className="w-4 h-4" />
+                  <span>لهواتف الآيفون والآيباد (iOS / Safari):</span>
+                </div>
+                <p className="text-xs text-slate-300 leading-normal">
+                  اضغط على زر المشاركة <strong className="text-white">(Share)</strong> في شريط سفلي بسفاري، ثم اختر <strong className="text-white">&quot;إضافة إلى الشاشة الرئيسية&quot; (Add to Home Screen)</strong> ثم <strong className="text-white">إضافة</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-5 flex gap-2">
+              {isInstallable && (
+                <button
+                  onClick={async () => {
+                    await install();
+                    setShowGuide(false);
+                  }}
+                  className="flex-1 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 py-2.5 text-xs sm:text-sm font-bold text-white transition active:scale-95 shadow-md shadow-red-950 cursor-pointer"
+                >
+                  بدء التثبيت الآن
+                </button>
+              )}
+              <button
+                onClick={() => setShowGuide(false)}
+                className={`rounded-xl bg-slate-800 hover:bg-slate-700 py-2.5 text-xs sm:text-sm font-semibold text-slate-300 transition ${
+                  isInstallable ? 'px-4' : 'w-full'
+                }`}
+              >
+                إغلاق
               </button>
             </div>
           </div>
-        )}
-      </>
-    );
-  }
-
-  // Fallback desktop manual button to prompt user
-  return (
-    <button
-      onClick={() => {
-        alert('لتثبيت البرنامج: افتح قائمة خيارات المتصفح (⋮) واختر "تثبيت التطبيق" أو "Install app" أو اضغط على أيقونة التثبيت في شريط العنوان.');
-      }}
-      className="hidden md:flex items-center gap-1.5 rounded-xl bg-slate-800/80 border border-slate-700/80 px-3 py-1.5 text-xs font-semibold text-slate-300 hover:bg-slate-700 transition cursor-pointer"
-      title="تثبيت التطبيق على جهازك"
-    >
-      <Download className="w-3.5 h-3.5 text-red-400" />
-      <span>تثبيت كبرنامج</span>
-    </button>
+        </div>
+      )}
+    </>
   );
 };
+

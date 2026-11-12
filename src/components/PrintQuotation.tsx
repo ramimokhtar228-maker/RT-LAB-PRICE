@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { InvoiceRecord, LabSettings } from '../types/lab';
 import { Printer, X, FileText, CheckCircle, Clock, MapPin, Phone } from 'lucide-react';
+import rtLogo from '../assets/logo.png';
 
 interface PrintQuotationProps {
   isOpen: boolean;
@@ -100,9 +101,9 @@ export const PrintQuotation: React.FC<PrintQuotationProps> = ({
             <div className="flex items-center justify-between pb-4 border-b-2 border-red-700 mb-4">
               <div className="flex items-center gap-3">
                 <img
-                  src="/assets/aistudio/IMG_20261024_095049_855_cecabf0b.jpg"
+                  src={rtLogo}
                   alt="RT Labs"
-                  className="w-16 h-16 rounded-xl object-cover border border-slate-300"
+                  className="w-16 h-16 rounded-xl object-contain border border-slate-300 bg-black"
                 />
                 <div>
                   <h1 className="text-lg sm:text-xl font-black text-red-950 tracking-tight">

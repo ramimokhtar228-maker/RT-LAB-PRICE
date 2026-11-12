@@ -12,15 +12,16 @@ export default defineConfig(() => {
       tailwindcss(),
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['favicon.png', 'apple-touch-icon.png', 'icon.svg'],
+        includeAssets: ['favicon.png', 'apple-touch-icon.png', 'logo.png', 'pwa-192x192.png', 'pwa-512x512.png'],
         manifest: {
           id: './',
           name: 'معامل RT للتحاليل التشخيصية | د. رامي مختار',
           short_name: 'RT Labs',
-          description: 'نظام حساب أسعار التحاليل والعروض والواتساب لمعامل RT',
+          description: 'نظام حساب أسعار التحاليل والعروض والواتساب لمعامل RT للتحاليل التشخيصية',
           theme_color: '#0b0f19',
           background_color: '#0b0f19',
           display: 'standalone',
+          orientation: 'portrait',
           start_url: './',
           scope: './',
           icons: [
@@ -45,7 +46,7 @@ export default defineConfig(() => {
           ],
         },
         workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
+          globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2,jpg,jpeg}'],
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -85,7 +86,7 @@ export default defineConfig(() => {
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve(process.cwd(), '.'),
       },
     },
     server: {
@@ -97,3 +98,4 @@ export default defineConfig(() => {
     },
   };
 });
+

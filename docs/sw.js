@@ -81,52 +81,61 @@ define(['./workbox-afac4cd2'], (function (workbox) { 'use strict';
     "revision": "402b66900e731ca748771b6fc5e7a068"
   }, {
     "url": "pwa-maskable-512x512.png",
-    "revision": "ab6e73f83eedeb56a8e87256ad7dfe1e"
+    "revision": "15ee6ee8b337ea82d336969a204002b8"
   }, {
     "url": "pwa-512x512.png",
-    "revision": "fcc102dff688af3b89202a3c25fc947e"
+    "revision": "29514fcb6a6eee8e4dcddd3602d65274"
   }, {
     "url": "pwa-192x192.png",
-    "revision": "7deb6704af991661fcb88a333c4adc5c"
+    "revision": "a075728c91b4bb74211333375889362a"
+  }, {
+    "url": "logo.png",
+    "revision": "adef82a1f47a1ea393e683eba461503b"
+  }, {
+    "url": "logo.jpg",
+    "revision": "ac9645ae4ab8acb6aca7996f4a699cf6"
   }, {
     "url": "index.html",
-    "revision": "35c72235e6ac3bce25f66773e911c82f"
-  }, {
-    "url": "icon.svg",
-    "revision": "41de24e17f040bd9c96acfc46e50e2d6"
+    "revision": "a24ce1edb851f7de1501698ce0c17084"
   }, {
     "url": "favicon.png",
-    "revision": "844a4551764233e977a0ee78c0a5f0cf"
+    "revision": "7ff7a968a35b49989c719c2fa81fbaaa"
   }, {
     "url": "apple-touch-icon.png",
-    "revision": "5e6c065a7b76fbea4f65ff63cffa2263"
+    "revision": "596ef25f61e7d99c9236e346a4cdf5d4"
   }, {
-    "url": "assets/index-C_LC-0Y_.css",
+    "url": "assets/logo-BKWIMXhz.png",
     "revision": null
   }, {
-    "url": "assets/index-1jKNMbrH.js",
+    "url": "assets/index-DUw3DU4m.css",
+    "revision": null
+  }, {
+    "url": "assets/index-CNxQwoNU.js",
+    "revision": null
+  }, {
+    "url": "assets/aistudio/IMG_20261024_095049_855_cecabf0b.jpg",
     "revision": null
   }, {
     "url": "apple-touch-icon.png",
-    "revision": "5e6c065a7b76fbea4f65ff63cffa2263"
+    "revision": "596ef25f61e7d99c9236e346a4cdf5d4"
   }, {
     "url": "favicon.png",
-    "revision": "844a4551764233e977a0ee78c0a5f0cf"
+    "revision": "7ff7a968a35b49989c719c2fa81fbaaa"
   }, {
-    "url": "icon.svg",
-    "revision": "41de24e17f040bd9c96acfc46e50e2d6"
+    "url": "logo.png",
+    "revision": "adef82a1f47a1ea393e683eba461503b"
   }, {
     "url": "pwa-192x192.png",
-    "revision": "7deb6704af991661fcb88a333c4adc5c"
+    "revision": "a075728c91b4bb74211333375889362a"
   }, {
     "url": "pwa-512x512.png",
-    "revision": "fcc102dff688af3b89202a3c25fc947e"
+    "revision": "29514fcb6a6eee8e4dcddd3602d65274"
   }, {
     "url": "pwa-maskable-512x512.png",
-    "revision": "ab6e73f83eedeb56a8e87256ad7dfe1e"
+    "revision": "15ee6ee8b337ea82d336969a204002b8"
   }, {
     "url": "manifest.webmanifest",
-    "revision": "e287b69a69197718ea1d5d33e78d5679"
+    "revision": "5bdbda7bdc4585030c1b596fe43570a7"
   }], {});
   workbox.cleanupOutdatedCaches();
   workbox.registerRoute(new workbox.NavigationRoute(workbox.createHandlerBoundToURL("index.html")));

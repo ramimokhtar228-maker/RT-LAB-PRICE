@@ -3,6 +3,7 @@ import { PWAInstallButton } from './PWAInstallButton';
 import { OfflineIndicator } from './OfflineIndicator';
 import { Gift, FileText, Database, Settings as SettingsIcon, PlusCircle, Flame, Minimize2, Maximize2, Tag } from 'lucide-react';
 import { LabSettings } from '../types/lab';
+import rtLogo from '../assets/logo.png';
 
 interface HeaderProps {
   settings: LabSettings;
@@ -77,9 +78,9 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="relative group cursor-pointer" onClick={onNewInvoice}>
             <div className="absolute -inset-1 bg-gradient-to-r from-red-600 via-rose-500 to-blue-600 rounded-2xl blur-sm opacity-60 group-hover:opacity-90 transition duration-300" />
             <img
-              src="/assets/aistudio/IMG_20261024_095049_855_cecabf0b.jpg"
+              src={rtLogo}
               alt="RT Labs Logo"
-              className="relative w-11 h-11 sm:w-13 sm:h-13 rounded-xl object-cover border-2 border-red-500/50 shadow-md bg-black"
+              className="relative w-11 h-11 sm:w-13 sm:h-13 rounded-xl object-contain border-2 border-red-500/50 shadow-md bg-black"
             />
           </div>
 
